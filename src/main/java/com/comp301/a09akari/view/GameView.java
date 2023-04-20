@@ -11,7 +11,6 @@ public class GameView implements FXComponent, ModelObserver {
   private final Scene scene;
   private final PuzzleView puzzle;
   private final HeaderView header;
-  private final ControlsView controls;
 
   public GameView(Model model, ClassicMvcController controller) {
     if (model == null || controller == null) {
@@ -20,8 +19,7 @@ public class GameView implements FXComponent, ModelObserver {
 
     this.puzzle = new PuzzleView(model, controller);
     this.header = new HeaderView(model, controller);
-    this.controls = new ControlsView(model, controller);
-    this.scene = new Scene(render(), 450, 450);
+    this.scene = new Scene(render(), 400, 450);
     model.addObserver(this);
   }
 
@@ -30,7 +28,6 @@ public class GameView implements FXComponent, ModelObserver {
     BorderPane rootPane = new BorderPane();
     rootPane.setTop(header.render());
     rootPane.setCenter(puzzle.render());
-    rootPane.setBottom(controls.render());
     return rootPane;
   }
 

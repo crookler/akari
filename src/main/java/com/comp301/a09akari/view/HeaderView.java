@@ -43,14 +43,21 @@ public class HeaderView implements FXComponent {
     previousPuzzle.setOnAction((ActionEvent) -> controller.clickPrevPuzzle());
     Button shuffle = new Button("Shuffle");
     shuffle.setOnAction((ActionEvent) -> controller.clickRandPuzzle());
+    Button reset = new Button("Reset");
+    reset.setOnAction((ActionEvent) -> controller.clickResetPuzzle());
     Button nextPuzzle = new Button("Next Puzzle ->");
     nextPuzzle.setOnAction((ActionEvent) -> controller.clickNextPuzzle());
 
     HBox options = new HBox();
     options.setAlignment(Pos.CENTER);
-    options.getChildren().addAll(previousPuzzle, shuffle, nextPuzzle);
-
+    options.getChildren().addAll(previousPuzzle, shuffle, reset, nextPuzzle);
     formatting.getChildren().add(options);
+
+    if (model.isSolved()) {
+      Label winning = new Label();
+      winning.setText("Puzzle is Solved!");
+      formatting.getChildren().add(winning);
+    }
 
     return formatting;
   }
