@@ -99,8 +99,20 @@ public class ModelImpl implements Model {
     }
 
     @Override
-    public void resetPuzzle() {
-        lamps = new int[activePuzzle.getHeight()][activePuzzle.getWidth()];
+    public void resetPuzzle()
+    {
+        int rowBoundary = activePuzzle.getHeight();
+        int columnBoundary = activePuzzle.getWidth();
+
+        //set all lamp indicators to 0
+        for (int row = 0; row < rowBoundary; row++)
+        {
+            for (int column = 0; column < columnBoundary; column++)
+            {
+                lamps[row][column] = 0;
+            }
+        }
+
         notifyObservers();
     }
 
@@ -181,8 +193,8 @@ public class ModelImpl implements Model {
     private boolean checkSurroundingsForLamp(int r, int c) {
         //Check current row for lamp
         for (int direction = 1; direction >= -1; direction -= 2) {
-            int offset = 0;
-            int column = c;
+            int offset = 1; //start 1 away from source
+            int column = c + (direction * offset);
 
             //Check row for valid indices or until a non-corridor is hit
             while (column >= 0 && column < activePuzzle.getWidth()
@@ -199,8 +211,8 @@ public class ModelImpl implements Model {
 
         //Check current column for lamp
         for (int direction = 1; direction >= -1; direction -= 2) {
-            int offset = 0;
-            int row = r;
+            int offset = 1; //start 1 away from source
+            int row = r + (direction * offset);
 
             //Check column for valid indices or until a non-corridor is hit
             while (row >= 0 && row < activePuzzle.getHeight()
