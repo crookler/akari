@@ -6,18 +6,16 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class AppLauncher extends Application
-{
-  @Override
-  public void start(Stage stage)
-  {
-      stage.setTitle("Play Akari!");
+public class AppLauncher extends Application {
+    @Override
+    public void start(Stage stage) {
+        stage.setTitle("Play Akari!");
 
-      BorderPane fullGameView = new BorderPane();
+        BorderPane fullGameView = new BorderPane();
 
-      fullGameView.setCenter(new GridPane());
+        fullGameView.setCenter(new GridPane());
 
-      Scene gameView = new Scene(fullGameView, 300, 250);
+        Scene gameView = new Scene(fullGameView, 300, 250);
 
-  }
+    }
 }

@@ -6,9 +6,9 @@ import java.util.List;
 public class ModelImpl implements Model {
     private final PuzzleLibrary library;
     private final List<ModelObserver> activeObservers;
+    private final int[][] lamps;
     private int activeIndex;
     private Puzzle activePuzzle;
-    private final int[][] lamps;
 
     public ModelImpl(PuzzleLibrary library) {
         if (library == null) {
