@@ -5,10 +5,10 @@ import java.util.List;
 
 public class ModelImpl implements Model {
     private final PuzzleLibrary library;
+    private final List<ModelObserver> activeObservers;
     private int activeIndex;
     private Puzzle activePuzzle;
-    private int[][] lamps;
-    private final List<ModelObserver> activeObservers;
+    private final int[][] lamps;
 
     public ModelImpl(PuzzleLibrary library) {
         if (library == null) {
@@ -99,16 +99,13 @@ public class ModelImpl implements Model {
     }
 
     @Override
-    public void resetPuzzle()
-    {
+    public void resetPuzzle() {
         int rowBoundary = activePuzzle.getHeight();
         int columnBoundary = activePuzzle.getWidth();
 
-        //set all lamp indicators to 0
-        for (int row = 0; row < rowBoundary; row++)
-        {
-            for (int column = 0; column < columnBoundary; column++)
-            {
+        //set all lamp indicators to 0 (no lamp)
+        for (int row = 0; row < rowBoundary; row++) {
+            for (int column = 0; column < columnBoundary; column++) {
                 lamps[row][column] = 0;
             }
         }
