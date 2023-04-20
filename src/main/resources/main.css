@@ -5,3 +5,16 @@
  * JavaFX start() method:
  *   scene.getStylesheets().add("main.css");
  */
+
+ .lampControl{
+   -fx-border-color: transparent;
+   -fx-border-width: 0;
+   -fx-background-radius: 0;
+   -fx-background-color: transparent;
+   -fx-background-radius: 0
+ }
+
+ .cell {
+    -fx-border-color: grey;
+    -fx-border-width: 1;
+ }

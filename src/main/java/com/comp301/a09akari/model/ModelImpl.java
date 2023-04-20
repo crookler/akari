@@ -6,7 +6,7 @@ import java.util.List;
 public class ModelImpl implements Model {
   private final PuzzleLibrary library;
   private final List<ModelObserver> activeObservers;
-  private final int[][] lamps;
+  private int[][] lamps;
   private int activeIndex;
   private Puzzle activePuzzle;
 
@@ -89,6 +89,7 @@ public class ModelImpl implements Model {
 
     this.activeIndex = index;
     this.activePuzzle = library.getPuzzle(activeIndex);
+    this.lamps = new int[activePuzzle.getHeight()][activePuzzle.getWidth()];
     notifyObservers();
   }
 

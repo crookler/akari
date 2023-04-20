@@ -1,9 +1,11 @@
 package com.comp301.a09akari.view;
 
+import com.comp301.a09akari.SamplePuzzles;
+import com.comp301.a09akari.controller.ClassicMvcController;
+import com.comp301.a09akari.controller.ControllerImpl;
+import com.comp301.a09akari.model.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class AppLauncher extends Application {
@@ -11,10 +13,21 @@ public class AppLauncher extends Application {
   public void start(Stage stage) {
     stage.setTitle("Play Akari!");
 
-    BorderPane fullGameView = new BorderPane();
+    // Create puzzle library from sample puzzles
+    PuzzleLibrary offeredPuzzles = new PuzzleLibraryImpl();
+    offeredPuzzles.addPuzzle(new PuzzleImpl(SamplePuzzles.PUZZLE_01));
+    offeredPuzzles.addPuzzle(new PuzzleImpl(SamplePuzzles.PUZZLE_02));
+    offeredPuzzles.addPuzzle(new PuzzleImpl(SamplePuzzles.PUZZLE_03));
+    offeredPuzzles.addPuzzle(new PuzzleImpl(SamplePuzzles.PUZZLE_04));
+    offeredPuzzles.addPuzzle(new PuzzleImpl(SamplePuzzles.PUZZLE_05));
 
-    fullGameView.setCenter(new GridPane());
+    Model model = new ModelImpl(offeredPuzzles);
+    ClassicMvcController controller = new ControllerImpl(model);
+    GameView view = new GameView(model, controller);
 
-    Scene gameView = new Scene(fullGameView, 300, 250);
+    Scene scene = view.getScene();
+    scene.getStylesheets().add("main.css");
+    stage.setScene(scene);
+    stage.show();
   }
 }
