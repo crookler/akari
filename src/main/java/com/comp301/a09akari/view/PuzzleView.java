@@ -38,52 +38,47 @@ public class PuzzleView implements FXComponent {
       for (int columns = 0; columns < columnsBoundary; columns++) {
         StackPane cell = new StackPane();
         cell.getStyleClass().add("cell");
+        Rectangle cellDisplay = new Rectangle(30, 30);
 
-        if (model.getActivePuzzle().getCellType(rows, columns) == CellType.CORRIDOR) {
+        if (model.getActivePuzzle().getCellType(rows, columns) == CellType.CORRIDOR) { //handle corridor (lamp/lit/unlit)
           if (model.isLit(rows, columns)) {
             if (model.isLamp(rows, columns) && model.isLampIllegal(rows, columns)) {
-              Rectangle cellDisplay = new Rectangle(30, 30);
               cellDisplay.setFill(Color.RED);
-              cell.getChildren().add(cellDisplay);
             } else if (model.isLamp(rows, columns)) {
-              Rectangle cellDisplay = new Rectangle(30, 30);
               cellDisplay.setFill(Color.ORANGE);
-              cell.getChildren().add(cellDisplay);
             } else {
-              Rectangle cellDisplay = new Rectangle(30, 30);
               cellDisplay.setFill(Color.YELLOW);
-              cell.getChildren().add(cellDisplay);
             }
           } else {
-            Rectangle cellDisplay = new Rectangle(30, 30);
             cellDisplay.setFill(Color.WHITE);
-            cell.getChildren().add(cellDisplay);
           }
-
-          /*
-          if (model.isLamp(rows, columns))
-          {
-              //TODO add lamp icon
-          }
-          */
 
           int currentRow = rows;
           int currentColumn = columns;
 
+          //Add button to each corridor that will place at lamp at that location if called
           Button lampControl = new Button();
           lampControl.setPrefHeight(30);
           lampControl.setPrefWidth(30);
           lampControl.getStyleClass().add("lampControl");
           lampControl.setOnAction((ActionEvent) -> controller.clickCell(currentRow, currentColumn));
+          cell.getChildren().add(cellDisplay);
           cell.getChildren().add(lampControl);
-        } else if (model.getActivePuzzle().getCellType(rows, columns) == CellType.CLUE) {
-          Rectangle cellDisplay = new Rectangle(30, 30);
-          cellDisplay.setFill(Color.BLACK);
+        } else if (model.getActivePuzzle().getCellType(rows, columns) == CellType.CLUE) { //handle clue (satisfied vs unsatisfied)
+          if (model.isClueSatisfied(rows,columns))
+          {
+            cellDisplay.setFill(Color.DARKTURQUOISE);
+          }
+          else
+          {
+            cellDisplay.setFill((Color.BLACK));
+          }
           Label clueNumber = new Label("" + model.getActivePuzzle().getClue(rows, columns));
           clueNumber.setTextFill(Color.WHITE);
-          cell.getChildren().addAll(cellDisplay, clueNumber);
+          clueNumber.getStyleClass().add("clueNumber");
+          cell.getChildren().add(cellDisplay);
+          cell.getChildren().add(clueNumber);
         } else if (model.getActivePuzzle().getCellType(rows, columns) == CellType.WALL) {
-          Rectangle cellDisplay = new Rectangle(30, 30);
           cellDisplay.setFill(Color.BLACK);
           cell.getChildren().add(cellDisplay);
         } else {

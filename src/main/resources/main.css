@@ -18,3 +18,7 @@
     -fx-border-color: grey;
     -fx-border-width: 1;
  }
+
+ .clueNumber {
+    -fx-font-size: 15px;
+ }
