@@ -40,7 +40,8 @@ public class PuzzleView implements FXComponent {
         cell.getStyleClass().add("cell");
         Rectangle cellDisplay = new Rectangle(30, 30);
 
-        if (model.getActivePuzzle().getCellType(rows, columns) == CellType.CORRIDOR) { //handle corridor (lamp/lit/unlit)
+        if (model.getActivePuzzle().getCellType(rows, columns)
+            == CellType.CORRIDOR) { // handle corridor (lamp/lit/unlit)
           if (model.isLit(rows, columns)) {
             if (model.isLamp(rows, columns) && model.isLampIllegal(rows, columns)) {
               cellDisplay.setFill(Color.RED);
@@ -56,7 +57,7 @@ public class PuzzleView implements FXComponent {
           int currentRow = rows;
           int currentColumn = columns;
 
-          //Add button to each corridor that will place at lamp at that location if called
+          // Add button to each corridor that will place at lamp at that location if called
           Button lampControl = new Button();
           lampControl.setPrefHeight(30);
           lampControl.setPrefWidth(30);
@@ -64,13 +65,11 @@ public class PuzzleView implements FXComponent {
           lampControl.setOnAction((ActionEvent) -> controller.clickCell(currentRow, currentColumn));
           cell.getChildren().add(cellDisplay);
           cell.getChildren().add(lampControl);
-        } else if (model.getActivePuzzle().getCellType(rows, columns) == CellType.CLUE) { //handle clue (satisfied vs unsatisfied)
-          if (model.isClueSatisfied(rows,columns))
-          {
+        } else if (model.getActivePuzzle().getCellType(rows, columns)
+            == CellType.CLUE) { // handle clue (satisfied vs unsatisfied)
+          if (model.isClueSatisfied(rows, columns)) {
             cellDisplay.setFill(Color.DARKTURQUOISE);
-          }
-          else
-          {
+          } else {
             cellDisplay.setFill((Color.BLACK));
           }
           Label clueNumber = new Label("" + model.getActivePuzzle().getClue(rows, columns));
