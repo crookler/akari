@@ -39,6 +39,7 @@ public class PuzzleView implements FXComponent {
     for (int rows = 0; rows < rowsBoundary; rows++) {
       for (int columns = 0; columns < columnsBoundary; columns++) {
         StackPane cell = new StackPane();
+        cell.setAlignment(Pos.CENTER);
         cell.getStyleClass().add("cell");
         Rectangle cellDisplay = new Rectangle(30, 30);
 
@@ -51,7 +52,7 @@ public class PuzzleView implements FXComponent {
               ImageView lamp = makeLampImage();
               cell.getChildren().add(lamp);
             } else if (model.isLamp(rows, columns)) {
-              cellDisplay.setFill(Color.LIGHTGOLDENRODYELLOW);
+              cellDisplay.setFill(Color.ORANGE);
               cell.getChildren().add(cellDisplay);
               ImageView lamp = makeLampImage();
               cell.getChildren().add(lamp);
