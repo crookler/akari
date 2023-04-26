@@ -26,3 +26,8 @@
 .header {
     -fx-spacing: 2
 }
+
+.gameBorder {
+    -fx-border-width: 5;
+    -fx-border-color: black;
+}
