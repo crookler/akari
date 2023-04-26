@@ -7,6 +7,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -45,10 +47,17 @@ public class PuzzleView implements FXComponent {
           if (model.isLit(rows, columns)) {
             if (model.isLamp(rows, columns) && model.isLampIllegal(rows, columns)) {
               cellDisplay.setFill(Color.RED);
+              cell.getChildren().add(cellDisplay);
+              ImageView lamp = makeLampImage();
+              cell.getChildren().add(lamp);
             } else if (model.isLamp(rows, columns)) {
-              cellDisplay.setFill(Color.ORANGE);
+              cellDisplay.setFill(Color.LIGHTGOLDENRODYELLOW);
+              cell.getChildren().add(cellDisplay);
+              ImageView lamp = makeLampImage();
+              cell.getChildren().add(lamp);
             } else {
               cellDisplay.setFill(Color.YELLOW);
+              cell.getChildren().add(cellDisplay);
             }
           } else {
             cellDisplay.setFill(Color.WHITE);
@@ -63,7 +72,6 @@ public class PuzzleView implements FXComponent {
           lampControl.setPrefWidth(30);
           lampControl.getStyleClass().add("lampControl");
           lampControl.setOnAction((ActionEvent) -> controller.clickCell(currentRow, currentColumn));
-          cell.getChildren().add(cellDisplay);
           cell.getChildren().add(lampControl);
         } else if (model.getActivePuzzle().getCellType(rows, columns)
             == CellType.CLUE) { // handle clue (satisfied vs unsatisfied)
@@ -89,5 +97,16 @@ public class PuzzleView implements FXComponent {
     }
 
     return grid;
+  }
+
+  private ImageView makeLampImage() {
+    Image image = new Image("light-bulb.png");
+
+    ImageView imageView = new ImageView();
+    imageView.setImage(image);
+    imageView.setFitWidth(25);
+    imageView.setFitHeight(25);
+    imageView.setPreserveRatio(true);
+    return imageView;
   }
 }

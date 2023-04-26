@@ -22,3 +22,7 @@
  .clueNumber {
     -fx-font-size: 15px;
  }
+
+.header {
+    -fx-spacing: 2
+}
