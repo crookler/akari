@@ -1,4 +1,4 @@
-## Comments
+# Comments
 This is my final project for my COMP 301 course (foundations of programming). It focuses on using the JavaFX library to create a GUI, and serves as the capstone in my work using the MVC design pattern. 
 
 # Provided Instructions (For Context)
